@@ -27,3 +27,8 @@ function LoadDiary(){
 function AddHelloMessage(name){
     document.getElementById("helloMessage").innerHTML = "Hello, " + name + "!";
 }
+
+function OpenChooseElementPage(){
+    const name = new URLSearchParams(window.location.search).get('name');
+    window.open(`chooseelement.html?name=${name}`, "_self");
+}

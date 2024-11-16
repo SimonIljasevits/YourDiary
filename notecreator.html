@@ -1,0 +1,45 @@
+<h1 style="font-size: 75px;">Write your super important note!</h1>
+
+<div class="notetitle">
+    <h2>Title</h2>
+    <textarea style="font-size: 20px;" id="notetitleinput" class="notetitleinput" type="text" placeholder="Write a title for your note"onkeypress="OnNoteTitleInput(this)" ></textarea>
+</div>
+<div class="note">
+    <h2>Note</h2>
+    <textarea style="font-size: 20px;" id="noteinput" class="noteinput" type="text" placeholder="Write your note" onkeypress="OnNoteTitleInput(this)" ></textarea>
+</div>
+ <button type="submit" style="margin-top: 30px;" onclick="SubmitNode()"><p style="font-size: 20px;">Add Node</p></button>
+
+<style>
+    .notetitleinput {
+        border-radius: 25px;
+        border: 2px solid #000000;
+        padding: 20px;
+        width: 90vh;
+        height: fit-content;
+    }
+
+    .note {
+        margin-top: 40px;
+    }
+
+    .noteinput {
+        border-radius: 0px;
+        border: 2px solid #000000;
+        padding: 20px;
+        width: 90vh;
+        height: 400px;
+    }
+</style>
+
+<script>
+    function SubmitNode(){
+        const titlevalue = document.getElementById("notetitleinput").value;
+        const notevalue = document.getElementById("noteinput").value;
+        if (titlevalue == "" || notevalue == ""){
+            alert("Tile or note field are empty.")
+            return;
+        }
+    }
+</script>
+
