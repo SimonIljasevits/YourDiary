@@ -39,12 +39,15 @@ async function AddDiaryNotes(name){
     }
 }
 function AddDiaryNote(date, title, note){
-    document.getElementById("notes").innerHTML +=
+    const notesBody = document.getElementById("notes");
+    notesBody.innerHTML +=
     `<div class="note">
             <h2>${date}</h2>
             <h1 style=font-size:50px>${title}</h1>
             <p>${note.slice(0, 120) + "..."}</p>
     </div>`;
+    console.log(document.readyState);
+    notesBody.lastChild.addEventListener('click', function (event){console.log(event.target)}, true);
 }
 
 function OpenChooseElementPage(){
