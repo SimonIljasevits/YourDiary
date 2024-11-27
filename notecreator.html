@@ -33,13 +33,24 @@
 </style>
 
 <script>
-    function SubmitNode(){
+    const dbNotesUrl = "https://kool.krister.ee/chat/YourDiaryNotes"
+    
+    async function SubmitNode(){
         const titlevalue = document.getElementById("notetitleinput").value;
         const notevalue = document.getElementById("noteinput").value;
+        const name = new URLSearchParams(window.location.search).get('name');
         if (titlevalue == "" || notevalue == ""){
             alert("Tile or note field are empty.")
             return;
         }
+        await fetch("https://kool.krister.ee/chat/" + name + "DiaryNotes", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({date: new Date().toLocaleDateString(), title: titlevalue, note: notevalue }),
+        });
+        window.open(`diary.html?name=${name}`, "_self");
     }
 </script>
 

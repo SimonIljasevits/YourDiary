@@ -22,10 +22,29 @@ function OpenDiary() {
 function LoadDiary(){
     const name = new URLSearchParams(window.location.search).get('name');
     AddHelloMessage(name);
+    AddDiaryNotes(name);
 }
 
 function AddHelloMessage(name){
     document.getElementById("helloMessage").innerHTML = "Hello, " + name + "!";
+}
+
+async function AddDiaryNotes(name){
+    const response = await fetch("https://kool.krister.ee/chat/" + name + "DiaryNotes");
+    const data = await response.json();
+    data.reverse();
+
+    for (const item of data){
+       AddDiaryNote(item.date, item.title, item.note) 
+    }
+}
+function AddDiaryNote(date, title, note){
+    document.getElementById("notes").innerHTML +=
+    `<div class="note">
+            <h2>${date}</h2>
+            <h1 style=font-size:50px>${title}</h1>
+            <p>${note.slice(0, 120) + "..."}</p>
+    </div>`;
 }
 
 function OpenChooseElementPage(){
