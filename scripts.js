@@ -22,14 +22,14 @@ function OpenDiary() {
 function LoadDiary(){
     const name = new URLSearchParams(window.location.search).get('name');
     AddHelloMessage(name);
-    AddDiaryNotes(name);
+    AddDiaryNotesFromDb(name);
 }
 
 function AddHelloMessage(name){
     document.getElementById("helloMessage").innerHTML = "Hello, " + name + "!";
 }
 
-async function AddDiaryNotes(name){
+async function AddDiaryNotesFromDb(name){
     const response = await fetch("https://kool.krister.ee/chat/" + name + "DiaryNotes");
     const data = await response.json();
     data.reverse();
