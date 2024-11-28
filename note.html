@@ -1,0 +1,17 @@
+<div style="  max-width: fit-content; margin-left: auto; margin-right: auto;">
+    <h1 class="title" style="font-size:50px; text-align: center;">Title</h1>
+    <p class="note" style="font-size:30px; text-align: center;">Note</p>
+</div>
+
+<div style="max-width: fit-content; margin-left: auto; margin-right: auto;">
+    <button type="button" style="margin-left: auto;margin-right: auto;" onclick="GoBack()"><p style="font-size:30px;">Go back to your Diary</p></button>
+</div>
+<script>
+    document.querySelector(".title").innerHTML = new URLSearchParams(window.location.search).get('title');
+    document.querySelector(".note").innerHTML = new URLSearchParams(window.location.search).get('note');
+
+    function GoBack(){
+        const name = new URLSearchParams(window.location.search).get('name');
+        window.open(`diary.html?name=${name}`, "_self");
+    }
+</script>
