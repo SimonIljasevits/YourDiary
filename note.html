@@ -1,17 +1,38 @@
-<div style="  max-width: fit-content; margin-left: auto; margin-right: auto;">
-    <h1 class="title" style="font-size:50px; text-align: center;">Title</h1>
-    <p class="note" style="font-size:30px; text-align: center;">Note</p>
+<link rel="stylesheet" href="style.css">
+<div class="titleDiv" style="display: none;">
+</div>
+<div class="noteDiv" style="display: none;">
 </div>
 
-<div style="max-width: fit-content; margin-left: auto; margin-right: auto;">
+<div class="buttonDiv" style="max-width: fit-content; margin-left: auto; margin-right: auto; display: none;">
     <button type="button" style="margin-left: auto;margin-right: auto;" onclick="GoBack()"><p style="font-size:30px;">Go back to your Diary</p></button>
 </div>
 <script>
-    document.querySelector(".title").innerHTML = new URLSearchParams(window.location.search).get('title');
-    document.querySelector(".note").innerHTML = new URLSearchParams(window.location.search).get('note');
+    const name = new URLSearchParams(window.location.search).get('name');
+    const id = new URLSearchParams(window.location.search).get('id');
+
+    FetchNote();
+
+    async function FetchNote(){
+        const response = await fetch("https://kool.krister.ee/chat/" + name + "DiaryNotes");
+        const data = await response.json();
+
+        for (const item of data){
+            if (item.id === id){
+                const noteDiv = document.querySelector(".noteDiv");
+                const buttonDiv = document.querySelector(".buttonDiv");
+                const titleDiv = document.querySelector(".titleDiv");
+                
+                titleDiv.innerHTML += `<p>${item.date}</p><h1 class="titleText" style="font-size:50px; text-align: center;">${item.title}</h1>`
+                noteDiv.innerHTML = `<p class="noteText" style="font-size:30px; white-space: pre-line;">${item.note}</p>`;
+                titleDiv.style.display = "block";
+                noteDiv.style.display = "block";
+                buttonDiv.style.display = "block";
+            }
+        }
+    }
 
     function GoBack(){
-        const name = new URLSearchParams(window.location.search).get('name');
         window.open(`diary.html?name=${name}`, "_self");
     }
 </script>

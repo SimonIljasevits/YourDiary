@@ -47,7 +47,7 @@ async function AddDiaryNotesFromDb(name){
             for (const item of diaryNotes){
                 if (item.title === this.querySelector("h1").innerHTML){
                     const name = new URLSearchParams(window.location.search).get('name');
-                    window.open(`note.html?name=${name}&title=${item.title}&note=${item.note}`, "_self");
+                    window.open(`note.html?name=${name}&id=${item.id}`, "_self");
                 }
              }
         });
